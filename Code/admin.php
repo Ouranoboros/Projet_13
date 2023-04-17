@@ -251,13 +251,21 @@ include 'config/database.php';
 										</tr>
 									</thead>
 									<tbody class="text-center">
+										<?php
+                    					// Récupérer les données de la table post
+                    					$bdd = new PDO('mysql:host=localhost;dbname=projet13;charset=utf8','root');
+                    					$requete = $bdd->query("SELECT * FROM projets");
+                    					// Tant que les données sont récupérées
+                    					while ($donnees = $requete->fetch(PDO::FETCH_ASSOC)) {
+                    					//     Afficher les données
+                    					?>
 										<tr>
-											<td>Ana</td>
-											<td>Diseñador</td>
-											<td>Diseño</td>
-											<td>Diseño</td>
-											<td>Diseño</td>
-											<td>Diseño</td>
+											<td><?php echo $donnees['Titre']; ?></td>
+											<td><?php echo $donnees['Sous-titre']; ?></td>
+											<td><img src='<?php echo $donnees['image']; ?>' height="40px" width="80px" alt="Image d'illustration"></td>
+											<td><?php echo $donnees['Texte_intro']; ?></td>
+											<td><?php echo $donnees['Titre_expli']; ?></td>
+											<td><?php echo $donnees['Texte_expli']; ?></td>
 											<td
 												class="text-center align-middle"
 												style="max-height: 60px; height: 60px"
@@ -271,9 +279,9 @@ include 'config/database.php';
 													class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover"
 													role="button"
 													style="margin-left: 5px"
+													href="del_postid=<?php echo $donnees['id'];?>"
 													data-bs-toggle="modal"
-													data-bs-target="#delete-modal"
-													href="#"
+													data-bs-target="#modal-2"
 													><i
 														class="fas fa-trash btnNoBorders"
 														style="color: #dc3545"
@@ -281,36 +289,9 @@ include 'config/database.php';
 												></a>
 											</td>
 										</tr>
-										<tr>
-											<td>Fer<br /></td>
-											<td>Desarrollador</td>
-											<td>Development</td>
-											<td>Development</td>
-											<td>Development</td>
-											<td>Development</td>
-											<td
-												class="text-center align-middle"
-												style="max-height: 60px; height: 60px"
-											>
-												<a
-													class="btn btnMaterial btn-flat success semicircle"
-													role="button"
-													href="#"
-													><i class="fas fa-pen"></i></a
-												><a
-													class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover"
-													role="button"
-													style="margin-left: 5px"
-													data-bs-toggle="modal"
-													data-bs-target="#delete-modal"
-													href="#"
-													><i
-														class="fas fa-trash btnNoBorders"
-														style="color: #dc3545"
-													></i
-												></a>
-											</td>
-										</tr>
+										<?php 
+                    					}
+                    					?>
 									</tbody>
 								</table>
 							</div>
@@ -321,6 +302,7 @@ include 'config/database.php';
 			</div>
 			<!-- End: Ludens - 1 Index Table with Search & Sort Filters -->
 		</div>
+		
 		<div>
 			<!-- Start: Footer Clean -->
 			<footer
@@ -381,6 +363,8 @@ include 'config/database.php';
 			</footer>
 			<!-- End: Footer Clean -->
 		</div>
+		
+		
 		<div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -394,7 +378,7 @@ include 'config/database.php';
 						></button>
 					</div>
 					<div class="modal-body">
-						<form class="custom-form">
+						<form class="custom-form" action="admin.php" method="post" id="add_post">
 							<div class="row form-group" style="margin-bottom: 5px">
 								<div class="col-sm-4 label-column">
 									<label class="col-form-label" for="name-input-field"
@@ -402,7 +386,7 @@ include 'config/database.php';
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<input class="form-control" type="text" />
+									<input class="form-control" type="text" name="Titre" />
 								</div>
 							</div>
 							<div class="row form-group" style="margin-bottom: 5px">
@@ -412,7 +396,7 @@ include 'config/database.php';
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<input class="form-control" type="text" />
+									<input class="form-control" type="text" name="Sous-titre"/>
 								</div>
 							</div>
 							<div class="row form-group" style="margin-bottom: 5px">
@@ -422,7 +406,7 @@ include 'config/database.php';
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<input class="form-control" type="text" />
+									<input type="file" name="image" />
 								</div>
 							</div>
 							<div class="row form-group" style="margin-bottom: 5px">
@@ -432,7 +416,7 @@ include 'config/database.php';
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<textarea class="form-control"></textarea>
+									<textarea class="form-control"name="Texte_intro"></textarea>
 								</div>
 							</div>
 							<div class="row form-group" style="margin-bottom: 5px">
@@ -445,7 +429,7 @@ include 'config/database.php';
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<input class="form-control" type="text" />
+									<input class="form-control" type="text" name="Titre_expli"/>
 								</div>
 							</div>
 							<div class="row form-group">
@@ -455,17 +439,90 @@ include 'config/database.php';
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<textarea class="form-control"></textarea>
+									<textarea class="form-control" name="Texte_expli"></textarea>
 								</div>
 							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-primary" type="button">Envoyer</button>
+						<button class="btn btn-primary" type="submit" name="submit">Envoyer</button>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		<?php
+        if (isset($_POST['submit'])) {
+        // Alors
+        //     Récupérer la valeur de title
+            $titre = $format->validation($_POST['Titre']);
+            $titre = mysqli_real_escape_string($titre);
+        
+			$sous_titre = $format->validation($_POST['Sous-titre']);
+            $sous_titre = mysqli_real_escape_string($sous_titre );
+
+			$image = $format->validation($_POST['image']);
+            $image = mysqli_real_escape_string($sous_titre );
+
+			$texte_intro = $format->validation($_POST['Texte_intro']);
+            $texte_intro = mysqli_real_escape_string($texte_intro);
+
+			$titre_expli = $format->validation($_POST['Titre_expli']);
+            $titre_expli = mysqli_real_escape_string($titre_expli);
+
+			$texte_expli = $format->validation($_POST['Texte_expli']);
+            $texte_expli = mysqli_real_escape_string($texte_expli);
+
+        //     Si title est vide
+                if ($titre == "" || $sous_titre == "" || $image == "" || $texte_intro == "" || $titre_expli == "" || $texte_expli == "" ) {
+        //         Alors
+        //             Afficher un message d'erreur
+                    echo "<span class='error'> Un champ n'est pas renseigné.</span>";
+        //         Sinon
+                } else {
+        //             Insérer le post dans la table post
+                    $insert_post = $bdd->query("INSERT INTO projets(Titre, Sous-titre, Image, Texte_intro, Titre_expli, Texte_expli) VALUES ('$titre', '$sous_titre', '$uploaded_image', '$texte_intro', '$titre_expli', '$texte_expli' )");
+        //             Si le post est inséré
+        //                 Alors
+        //                     Afficher un message de succès
+                    if ($insert_post) {
+                        echo "<span class='success'> Votre message à été envoyé.</span>";
+        //                 Sinon
+        //                     Afficher un message d'erreur
+                    } else {
+                        echo "<span class='error'> Votre message n'a pas été envoyé.</span>";
+                    }
+                }
+        }
+        ?>
+
+		<!-- Start: Modal delete projet -->
+		<div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+		        <div class="modal-dialog" role="document">
+		            <div class="modal-content">
+		                <div class="modal-header">
+		                    <h4 class="modal-title">Supprimer</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+		                </div>
+		                <div class="modal-body">
+		                    <p>Voulez-vous supprimez ce projet ?</p>
+		                </div>
+		                <div class="modal-footer"><button class="btn btn-primary" type="button">Oui</button></div>
+		            </div>
+		        </div>
+		    </div>
+		<!-- End: Modal delete projet -->
+
+		<?php
+		if (isset($_GET["del_postid"])){
+    		$post_id = $_GET['del_postid'];
+    		$im = $bdd->query("SELECT * FROM post WHERE id = $post_id");
+    		$im = $im->fetch_assoc()['image'];
+    		$bdd->query("DELETE FROM post WHERE id = $post_id");
+    		unlink($im);
+    		echo "<script> alert('Le post à bien été supprimé.')</script>";
+		}
+		?>
+
 		<script src="assets/bootstrap/js/bootstrap.min.js?h=79ff9637b74326c362fb6f7f5801a7ba"></script>
 		<script src="assets/js/bs-init.js?h=ec5d4df3c798a2943b2ecbac76ebfde0"></script>
 		<script src="assets/js/Data-Table-with-Search-Sort-Filter-and-Zoom-using-TableSorter-tablesortermain.js?h=0b5112c06ff3094624f33df374e70be1"></script>
@@ -476,5 +533,6 @@ include 'config/database.php';
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 		<script src="assets/js/Ludens---1-Index-Table-with-Search--Sort-Filters-v20-Ludens---Material-UI-Actions.js?h=06c93bc70611575b0c0ad4e1a835f53c"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	</body>
 </html>

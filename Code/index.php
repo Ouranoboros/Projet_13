@@ -354,6 +354,14 @@ include 'config/database.php';
 			<!-- End: H2 -->
 			<div class="container">
 				<div class="row">
+				<?php
+                // Récupérer les données de la table post
+                $bdd = new PDO('mysql:host=localhost;dbname=projet13;charset=utf8','root');
+                $requete = $bdd->query("SELECT * FROM projets");
+                // Tant que les données sont récupérées
+                while ($donnees = $requete->fetch(PDO::FETCH_ASSOC)) {
+                //     Afficher les données
+                ?>	
 					<div class="col-sm-6 col-md-4">
 						<!-- Start: card container -->
 						<div class="card-container-imagia">
@@ -363,25 +371,23 @@ include 'config/database.php';
 								<div class="front-imagia">
 									<!-- Start: cover image -->
 									<div class="cover-imagia">
-										<img alt="" src="https://unsplash.it/720/500?image=1067" />
+										<img alt="" src='<?php echo $donnees['image']; ?>' />
 									</div>
 									<!-- End: cover image -->
 									<!-- Start: texte -->
 									<div class="content-imagia">
-										<h3 class="name-imagia">John Doe</h3>
-										<p class="subtitle-imagia">Subtitle</p>
+										<h3 class="name-imagia"><?php echo $donnees['Titre']; ?></h3>
+										<p class="subtitle-imagia"><?php echo $donnees['Sous-titre']; ?></p>
 										<p class="text-center">
 											<em
-												>Tantum autem cuique tribuendum, primum quantum ipse
-												efficere possis, deinde etiam quantum ille quem
-												diligas atque adiuves.</em
+												><?php echo $donnees['Texte_intro']; ?></em
 											>
 										</p>
 									</div>
 									<!-- End: texte -->
 									<!-- Start: footer -->
 									<div class="footer-imagia">
-										<span><i class="fa fa-plus"></i> More info</span>
+										<span><i class="fa fa-plus"></i> Plus d'informations</span>
 									</div>
 									<!-- End: footer -->
 								</div>
@@ -391,14 +397,9 @@ include 'config/database.php';
 									<!-- Start: content -->
 									<div class="content-imagia content-back-imagia">
 										<div>
-											<h3 class="text-center">Lorem Ipsum</h3>
+											<h3 class="text-center"><?php echo $donnees['Titre_expli']; ?></h3>
 											<p class="text-center">
-												Et hanc quidem praeter oppida multa duae civitates
-												exornant Seleucia opus Seleuci regis, et
-												Claudiopolis quam deduxit coloniam Claudius Caesar.
-												Isaura enim antehac nimium potens, olim subversa ut
-												rebellatrix interneciva aegre vestigia claritudinis
-												pristinae monstrat admodum pauca.
+											<?php echo $donnees['Texte_expli']; ?>
 											</p>
 										</div>
 									</div>
@@ -417,128 +418,10 @@ include 'config/database.php';
 						</div>
 						<!-- End: card container -->
 					</div>
-					<div class="col-sm-6 col-md-4">
-						<!-- Start: card container -->
-						<div class="card-container-imagia">
-							<!-- Start: card -->
-							<div class="card-imagia">
-								<!-- Start: front -->
-								<div class="front-imagia">
-									<!-- Start: cover gradient -->
-									<div class="cover-imagia cover-gradient"></div>
-									<!-- End: cover gradient -->
-									<!-- End: user image -->
-									<div class="content-imagia">
-										<h3 class="name-imagia">John Doe</h3>
-										<p class="subtitle-imagia">Subtitle</p>
-										<p class="text-center">
-											<em
-												>Tantum autem cuique tribuendum, primum quantum ipse
-												efficere possis, deinde etiam quantum ille quem
-												diligas atque adiuves.
-											</em>
-										</p>
-									</div>
-									<div class="footer-imagia">
-										<span><i class="fa fa-plus"></i> More info</span>
-									</div>
-								</div>
-								<!-- End: front -->
-								<!-- Start: back -->
-								<div class="back-imagia">
-									<!-- Start: content -->
-									<div class="content-imagia content-back-imagia">
-										<div>
-											<h3 class="text-center">Lorem Ipsum</h3>
-											<p class="text-center">
-												Et hanc quidem praeter oppida multa duae civitates
-												exornant Seleucia opus Seleuci regis, et
-												Claudiopolis quam deduxit coloniam Claudius Caesar.
-												Isaura enim antehac nimium potens, olim subversa ut
-												rebellatrix interneciva aegre vestigia claritudinis
-												pristinae monstrat admodum pauca.
-											</p>
-										</div>
-									</div>
-									<!-- End: content -->
-									<!-- Start: footer -->
-									<div class="footer-imagia">
-										<!-- Start: icons -->
-										<div class="social-imagia text-center"></div>
-										<!-- End: icons -->
-									</div>
-									<!-- End: footer -->
-								</div>
-								<!-- End: back -->
-							</div>
-							<!-- End: card -->
-						</div>
-						<!-- End: card container -->
-					</div>
-					<div class="col-sm-6 col-md-4">
-						<!-- Start: card container -->
-						<div class="card-container-imagia">
-							<!-- Start: card -->
-							<div class="card-imagia">
-								<!-- Start: front -->
-								<div class="front-imagia">
-									<!-- Start: cover image -->
-									<div class="cover-imagia">
-										<img alt="" src="https://unsplash.it/720/500?image=1067" />
-									</div>
-									<!-- End: cover image -->
-									<!-- End: user image -->
-									<!-- Start: texte -->
-									<div class="content-imagia">
-										<h3 class="name-imagia">John Doe</h3>
-										<p class="subtitle-imagia">Subtitle</p>
-										<p class="text-center">
-											<em
-												>Tantum autem cuique tribuendum, primum quantum ipse
-												efficere possis, deinde etiam quantum ille quem
-												diligas atque adiuves.
-											</em>
-										</p>
-									</div>
-									<!-- End: texte -->
-									<!-- Start: footer -->
-									<div class="footer-imagia">
-										<span><i class="fa fa-plus"></i> More info</span>
-									</div>
-									<!-- End: footer -->
-								</div>
-								<!-- End: front -->
-								<!-- Start: back -->
-								<div class="back-imagia">
-									<!-- Start: content -->
-									<div class="content-imagia content-back-imagia">
-										<div>
-											<h3 class="text-center">Lorem Ipsum</h3>
-											<p class="text-center">
-												Et hanc quidem praeter oppida multa duae civitates
-												exornant Seleucia opus Seleuci regis, et
-												Claudiopolis quam deduxit coloniam Claudius Caesar.
-												Isaura enim antehac nimium potens, olim subversa ut
-												rebellatrix interneciva aegre vestigia claritudinis
-												pristinae monstrat admodum pauca.
-											</p>
-										</div>
-									</div>
-									<!-- End: content -->
-									<!-- Start: footer -->
-									<div class="footer-imagia">
-										<!-- Start: icons -->
-										<div class="social-imagia text-center"></div>
-										<!-- End: icons -->
-									</div>
-									<!-- End: footer -->
-								</div>
-								<!-- End: back -->
-							</div>
-							<!-- End: card -->
-						</div>
-						<!-- End: card container -->
-					</div>
+
+					<?php 
+                    }
+                    ?>
 				</div>
 			</div>
 		</section>
@@ -648,7 +531,7 @@ include 'config/database.php';
 											class="form-control input input-tr"
 											type="text"
 											placeholder="Email"
-											required=""
+											required="email"
 										/>
 										<div class="line-box">
 											<div class="line"></div>
@@ -676,6 +559,7 @@ include 'config/database.php';
 										class="btn btn-primary submit-now"
 										data-bss-hover-animate="pulse"
 										type="submit"
+										name="send"
 									>
 										Envoyer
 									</button>
@@ -813,9 +697,9 @@ include 'config/database.php';
     $pass  = $in_bdd->fetch();
 	$pass = implode("",$pass);
 		
-	if(password_verify($password,$pass)){
+	if(password_verify($password,$hash)){
 		echo "ça marche !";
-		header('location: ' . ROOT_URL . 'admin.php');
+		header('location: ' . ROOT_URL . 'admin/');
     }
     else {
         echo "<script>alert('Mauvais credentials !')</script>";
