@@ -1,17 +1,11 @@
+<?php 
+include 'config/constants.php';
+include 'config/database.php';
+?>
+
 <!DOCTYPE html>
 
 <html lang="fr">
-
-<!-- Start: Connexion BDD -->
-<?php
-	try {
-		$bdd = new PDO('mysql:host=localhost;dbname=projet13;charset=utf8','root');
-		
-	} catch (Exception $e) {
-		die('Erreur : ' . $e ->
-	getMessage()); } ?>
-<!-- End: Connexion BDD -->
-
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />

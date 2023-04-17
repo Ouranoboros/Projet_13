@@ -1,14 +1,11 @@
+<?php 
+include 'config/constants.php';
+include 'config/database.php';
+?>
+
 <!DOCTYPE html>
 
 <html lang="fr">
-
-<!-- Start: Connexion BDD -->
-<?php
-	try {
-		$bdd = new PDO('mysql:host=localhost;dbname=projet13;charset=utf8','root');
-	} catch (Exception $e) {
-		die('Erreur : ' . $e ->
-	getMessage()); }?>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
@@ -805,20 +802,20 @@
 		</div>
 <?php if(isset($_POST['submit'])){
 	
+	$bdd = new PDO('mysql:host=localhost;dbname=projet13;charset=utf8','root');
+	
 	$password = $_POST["password"];
-    $hash = password_hash("$password", PASSWORD_DEFAULT);
-	echo($password);
-	echo($hash);
+    $hash = password_hash($password, PASSWORD_DEFAULT);
 
     $name = $_POST["identifiant"];
 
     $in_bdd = $bdd->query("SELECT password FROM user WHERE login = '$name'");
     $pass  = $in_bdd->fetch();
 	$pass = implode("",$pass);
-
+		
 	if(password_verify($password,$pass)){
 		echo "ça marche !";
-		header("location: ./admin.php");
+		header('location: ' . ROOT_URL . 'admin.php');
     }
     else {
         echo "<script>alert('Mauvais credentials !')</script>";
