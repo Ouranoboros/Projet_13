@@ -370,7 +370,7 @@ include 'config/database.php';
 								<div class="front-imagia">
 									<!-- Start: cover image -->
 									<div class="cover-imagia">
-										<img alt="" src='<?php echo $donnees['image']; ?>' />
+										<img alt="" src='<?php echo $donnees['Image']; ?>' />
 									</div>
 									<!-- End: cover image -->
 									<!-- Start: texte -->
@@ -500,7 +500,13 @@ include 'config/database.php';
 			</div>
 			<!-- End: Articles Cards -->
 		</div>
-		<div id="Mini-jeux" style="background-color: #ebf5ee"><textarea></textarea></div>
+		
+		<!-- Start: Jeux -->
+		<div id="Mini-jeux" style="background-color: #ebf5ee">
+		<textarea></textarea>
+		</div>
+		<!-- End: Jeux -->
+
 		<div id="contact" style="background-color: #bfa89e">
 			<!-- Start: Modern Contact Form -->
 			<section class="getintouch">
@@ -570,6 +576,7 @@ include 'config/database.php';
 			</section>
 			<!-- End: Modern Contact Form -->
 		</div>
+		
 		<!-- Start: Footer Clean -->
 		<footer class="text-center py-4" style="background-color: #78a1bb">
 			<div class="container">
@@ -704,7 +711,6 @@ include 'config/database.php';
         echo "<script>alert('Mauvais credentials !')</script>";
     }
 }?>
-
 <!-- End: Verif connexion -->
 
 		<!-- End: Modal connexion -->

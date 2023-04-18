@@ -261,7 +261,7 @@ include 'config/database.php';
 										<tr>
 											<td><?php echo $donnees['Titre']; ?></td>
 											<td><?php echo $donnees['Sous-titre']; ?></td>
-											<td><img src='<?php echo $donnees['image']; ?>' height="40px" width="80px" alt="Image d'illustration"></td>
+											<td><img src='<?php echo $donnees['Image']; ?>' height="40px" width="80px" alt="Image d'illustration"></td>
 											<td><?php echo $donnees['Texte_intro']; ?></td>
 											<td><?php echo $donnees['Titre_expli']; ?></td>
 											<td><?php echo $donnees['Texte_expli']; ?></td>
@@ -514,10 +514,7 @@ include 'config/database.php';
 		<?php
 		if (isset($_GET["del_postid"])){
     		$post_id = $_GET['del_postid'];
-    		$im = $bdd->query("SELECT * FROM post WHERE id = $post_id");
-    		$im = $im->fetch_assoc()['image'];
     		$bdd->query("DELETE FROM post WHERE id = $post_id");
-    		unlink($im);
     		echo "<script> alert('Le post à bien été supprimé.')</script>";
 		}
 		?>
