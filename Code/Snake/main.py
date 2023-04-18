@@ -1,6 +1,7 @@
 import math
 import random
 import pygame
+import asyncio
 import tkinter as tk
 from tkinter import messagebox
 
@@ -185,7 +186,7 @@ def message_box(subject, content):
         pass
 
 
-def main():
+async def main():
     global width, rows, s, snack
     width = 500
     rows = 20
@@ -215,7 +216,6 @@ def main():
             
         redrawWindow(win)
 
-        
-    pass
+    await asyncio.sleep(0)
 
-main()
+asyncio.run(main())
