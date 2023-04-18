@@ -1,5 +1,4 @@
 <?php 
-include 'config/constants.php';
 include 'config/database.php';
 ?>
 
@@ -406,7 +405,7 @@ include 'config/database.php';
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<input type="file" name="image" />
+								<input class="form-control" type="text" name="image" />
 								</div>
 							</div>
 							<div class="row form-group" style="margin-bottom: 5px">

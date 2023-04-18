@@ -1,5 +1,4 @@
 <?php 
-include 'config/constants.php';
 include 'config/database.php';
 ?>
 
@@ -699,7 +698,7 @@ include 'config/database.php';
 		
 	if(password_verify($password,$hash)){
 		echo "ça marche !";
-		header('location: ' . ROOT_URL . 'admin/');
+		header('location: admin');
     }
     else {
         echo "<script>alert('Mauvais credentials !')</script>";
