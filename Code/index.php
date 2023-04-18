@@ -132,6 +132,17 @@ include 'config/database.php';
 			rel="stylesheet"
 			href="assets/css/Team-with-rotating-cards.css?h=f53d22b660c53248ec6c03b0cf77b0f1"
 		/>
+	
+		<script src="index.js"></script>
+		<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+		</script>
+		<script type="text/javascript">
+		(function(){
+			emailjs.init("TqxcHHRipn_36dDFM");
+		})();
+		</script>
+
 	</head>
 
 	<body>
@@ -524,6 +535,7 @@ include 'config/database.php';
 											type="text"
 											placeholder="Prénom Nom"
 											required=""
+											id="name"
 										/>
 										<div class="line-box">
 											<div class="line"></div>
@@ -534,9 +546,10 @@ include 'config/database.php';
 									<div class="modern-form__form-group--padding-l form-group mb-3">
 										<input
 											class="form-control input input-tr"
-											type="text"
+											type="email"
 											placeholder="Email"
 											required="email"
+											id="email"
 										/>
 										<div class="line-box">
 											<div class="line"></div>
@@ -551,6 +564,7 @@ include 'config/database.php';
 											class="form-control input modern-form__form-control--textarea"
 											placeholder="Message"
 											required=""
+											id="message"
 										></textarea>
 										<div class="line-box">
 											<div class="line"></div>
@@ -565,6 +579,7 @@ include 'config/database.php';
 										data-bss-hover-animate="pulse"
 										type="submit"
 										name="send"
+										onclick="sendMail()"
 									>
 										Envoyer
 									</button>
