@@ -133,7 +133,7 @@ include 'config/database.php';
 			href="assets/css/Team-with-rotating-cards.css?h=f53d22b660c53248ec6c03b0cf77b0f1"
 		/>
 	
-		<script src="index.js"></script>
+		<script src="js\index.js"></script>
 		<script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
 		</script>
@@ -225,7 +225,8 @@ include 'config/database.php';
 							<a
 								class="nav-link active link-light"
 								data-bss-hover-animate="pulse"
-								href="#Mini-jeux"
+								href="http://localhost/Code/Snakejs/index.html"
+								target="_blank"
 								style="font-size: 20px; font-family: Roboto, sans-serif"
 								>Mini-Jeux</a
 							>
@@ -512,13 +513,7 @@ include 'config/database.php';
 			<!-- End: Articles Cards -->
 		</div>
 		
-		<!-- Start: Jeux -->
-		<div id="Mini-jeux" style="background-color: #ebf5ee">
-		<textarea></textarea>
-		</div>
-		<!-- End: Jeux -->
-
-		<div id="contact" style="background-color: #bfa89e">
+		<div id="contact" style="background-color: #ebf5ee">
 			<!-- Start: Modern Contact Form -->
 			<section class="getintouch">
 				<div class="container modern-form">
@@ -719,8 +714,9 @@ include 'config/database.php';
 	$pass = implode("",$pass);
 		
 	if(password_verify($password,$hash)){
-		echo "ça marche !";
-		header('location: admin');
+		echo '<script language="Javascript">
+            document.location.replace("admin.php");
+            </script>';
     }
     else {
         echo "<script>alert('Mauvais credentials !')</script>";

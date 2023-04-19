@@ -278,7 +278,7 @@ include 'config/database.php';
 													class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover"
 													role="button"
 													style="margin-left: 5px"
-													href="del_postid=<?php echo $donnees['id'];?>"
+													href="id=<?php echo $donnees['id'];?>"
 													data-bs-toggle="modal"
 													data-bs-target="#modal-2"
 													><i
@@ -512,9 +512,9 @@ include 'config/database.php';
 		<!-- End: Modal delete projet -->
 
 		<?php
-		if (isset($_GET["del_postid"])){
-    		$post_id = $_GET['del_postid'];
-    		$bdd->query("DELETE FROM post WHERE id = $post_id");
+		if (isset($_GET["id"])){
+    		$id = $_GET['id'];
+    		$bdd->query("DELETE FROM post WHERE id = $id");
     		echo "<script> alert('Le post à bien été supprimé.')</script>";
 		}
 		?>
