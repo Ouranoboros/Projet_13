@@ -528,8 +528,10 @@ include 'config/database.php';
 										<input
 											class="form-control input input-tr"
 											type="text"
-											placeholder="Prénom Nom"
+											placeholder="Nom"
 											required=""
+											pattern="^[A-Za-z '-]+$"
+											maxlength="20"
 											id="name"
 										/>
 										<div class="line-box">
@@ -543,6 +545,7 @@ include 'config/database.php';
 											class="form-control input input-tr"
 											type="email"
 											placeholder="Email"
+											maxlength="35"
 											required="email"
 											id="email"
 										/>
@@ -674,6 +677,7 @@ include 'config/database.php';
 								<input
 									class="form-control form-control-lg lg-frc"
 									type="text"
+									maxlength="15"
 									required=""
 									name="identifiant"
 									id="identifiant"

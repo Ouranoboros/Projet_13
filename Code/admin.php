@@ -393,7 +393,7 @@ echo $_SESSION['id'];
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<input class="form-control" type="text" name="Titre" />
+									<input class="form-control" type="text" id="Titre" name="Titre" />
 								</div>
 							</div>
 							<div class="row form-group" style="margin-bottom: 5px">
@@ -403,7 +403,7 @@ echo $_SESSION['id'];
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<input class="form-control" type="text" name="Sous-titre"/>
+									<input class="form-control" type="text" id="Sous-titre" name="Sous-titre"/>
 								</div>
 							</div>
 							<div class="row form-group" style="margin-bottom: 5px">
@@ -413,7 +413,7 @@ echo $_SESSION['id'];
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-								<input class="form-control" type="text" name="image" />
+								<input class="form-control" type="text" id="image" name="image" />
 								</div>
 							</div>
 							<div class="row form-group" style="margin-bottom: 5px">
@@ -423,7 +423,7 @@ echo $_SESSION['id'];
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<textarea class="form-control"name="Texte_intro"></textarea>
+									<textarea class="form-control"id="Texte_intro" name="Texte_intro"></textarea>
 								</div>
 							</div>
 							<div class="row form-group" style="margin-bottom: 5px">
@@ -436,7 +436,7 @@ echo $_SESSION['id'];
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<input class="form-control" type="text" name="Titre_expli"/>
+									<input class="form-control" type="text" id="Titre_expli" name="Titre_expli"/>
 								</div>
 							</div>
 							<div class="row form-group">
@@ -446,7 +446,7 @@ echo $_SESSION['id'];
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<textarea class="form-control" name="Texte_expli"></textarea>
+									<textarea class="form-control" id="Texte_expli" name="Texte_expli"></textarea>
 								</div>
 							</div>
 						</form>
