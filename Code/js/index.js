@@ -8,8 +8,9 @@ function sendMail() {
 	const serviceID = 'service_v7fbegx';
 	const templateID = 'template_lcrqf8q';
 
-	if (username === empty) && (email === empty) && (message === empty) {
-		alert('Les choix ne doivent pas être vide !!');
+	if (username === '' && email === '' && message === '') {
+		alert('Veuillez remplir tous les champs');
+		return false;
 	} else {
 		emailjs
 			.send(serviceID, templateID, params)

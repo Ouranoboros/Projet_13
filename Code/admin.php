@@ -1,5 +1,8 @@
 <?php 
 include 'config/database.php';
+/*session_start ();
+echo $_SESSION['id'];
+*/
 ?>
 
 <!DOCTYPE html>
@@ -192,7 +195,12 @@ include 'config/database.php';
 							>
 						</li>
 					</ul>
-					<button class="btn btn-primary" type="button">Déconnexion</button>
+					<button class="btn btn-primary" type="button">
+						<a
+						href="http://localhost/Code/index.php"
+						style="font-size: 20px; font-family: Roboto, sans-serif"
+						>Déconnexion</a>
+					</button>
 				</div>
 			</div>
 		</nav>

@@ -714,6 +714,12 @@ include 'config/database.php';
 	$pass = implode("",$pass);
 		
 	if(password_verify($password,$hash)){
+		/*
+		session_start ();
+		$id_bdd = $bdd->query("SELECT id FROM user WHERE login = '$name'");
+		echo $id
+		$_SESSION['id'] = $id_bdd;		
+		*/
 		echo '<script language="Javascript">
             document.location.replace("admin.php");
             </script>';
