@@ -388,7 +388,7 @@ include 'config/database.php';
 									<!-- Start: texte -->
 									<div class="content-imagia">
 										<h3 class="name-imagia"><?php echo $donnees['Titre']; ?></h3>
-										<p class="subtitle-imagia"><?php echo $donnees['Sous-titre']; ?></p>
+										<p class="subtitle-imagia"><?php echo $donnees['Sous_titre']; ?></p>
 										<p class="text-center">
 											<em
 												><?php echo $donnees['Texte_intro']; ?></em

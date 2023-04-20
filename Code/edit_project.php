@@ -2,6 +2,21 @@
 include 'config/database.php';
 ?>
 
+<?php
+$bdd = new PDO('mysql:host=localhost;dbname=projet13;charset=utf8','root');
+if (isset($_GET["edit_post"])){
+    $G_post_id = $_GET['edit_post'];
+    $requete = $bdd->query("SELECT * FROM projets WHERE id = $G_post_id");
+    $result = $requete->fetch(PDO::FETCH_ASSOC);
+    $G_title = $result["Titre"];
+    $G_subtitle = $result["Sous_titre"];
+    $G_image = $result["Image"];
+    $G_txtint = $result["Texte_intro"];
+    $G_titlexpl = $result["Titre_expli"];
+    $G_txtxpl = $result["Texte_expli"];
+}
+?>
+
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -133,7 +148,6 @@ include 'config/database.php';
 			href="assets/css/Team-with-rotating-cards.css?h=f53d22b660c53248ec6c03b0cf77b0f1"
 		/>
 	</head>
-
 	<body style="background-color: #ebf5ee">
 		<!-- Start: Navbar Centered Links -->
 		<nav
@@ -174,7 +188,7 @@ include 'config/database.php';
 					style="background-color: #78a1bb; padding: 5px"
 				>
 					<ul class="navbar-nav mx-auto">
-						<li class="nav-item">
+                        <li class="nav-item">
 							<a
 								class="nav-link active link-light"
 								data-bss-hover-animate="pulse"
@@ -183,7 +197,7 @@ include 'config/database.php';
 								>Accueil</a
 							>
 						</li>
-						<li class="nav-item">
+                        <li class="nav-item">
 							<a
 								class="nav-link active link-light"
 								data-bss-hover-animate="pulse"
@@ -211,107 +225,123 @@ include 'config/database.php';
 			</div>
 		</nav>
 		<!-- End: Navbar Centered Links -->
-		<div>
-			<!-- Start: Ludens - 1 Index Table with Search & Sort Filters -->
-			<div class="container-fluid" style="margin: 35px 0px">
-				<div class="row">
-					<div class="col-12 col-sm-6 col-md-6 d-lg-flex justify-content-lg-center">
-						<h3 class="text-dark mb-4" style="text-align: left">Projets</h3>
-					</div>
-					<div
-						class="col-12 col-sm-6 col-md-6 d-lg-flex justify-content-lg-center"
-					>
-						<a
-						class="nav-link link-dark"
-						href="http://localhost/Code/add_project.php"
-						style="font-size: 20px; font-family: Roboto, sans-serif"
-						>Ajouter un Projet</a
-						>
-					</div>
-				</div>
-				<!-- Start: TableSorter -->
-				<div class="card" id="TableSorterCard">
-					<div class="card-header py-3">
-						<div class="row table-topper align-items-center">
-							<div
-								class="col-12 col-sm-5 col-md-6 text-start"
-								style="margin: 0px; padding: 5px 15px"
-							>
-								<p class="text-primary m-0 fw-bold">Cartes de projets</p>
+
+        <div class="grid_10">
+    <div class="box round first grid">
+        <h2>Ajouter un nouveau post</h2>
+        <?php
+        // Si la méthode de requête est POST
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Alors
+        //     Récupérer la valeur de title
+            $titre =($_POST['Titre']);
+        
+			$sous_titre =($_POST['Sous-titre']);
+
+			$image =($_POST['image']);
+
+			$texte_intro =($_POST['Texte_intro']);
+
+			$titre_expli =($_POST['Titre_expli']);
+
+			$texte_expli =($_POST['Texte_expli']);
+
+        //     Si title est vide
+                if ($titre == "" || $sous_titre == "" || $image == "" || $texte_intro == "" || $titre_expli == "" || $texte_expli == "" ) {
+        //         Alors
+        //             Afficher un message d'erreur
+                    echo "<span class='error'> Un champ n'est pas renseigné.</span>";
+        //         Sinon
+                } else {
+        //             Insérer le post dans la table post
+                    $insert_post = $bdd->query("INSERT INTO projets(Titre, Sous_titre, Image, Texte_intro, Titre_expli, Texte_expli) VALUES ('$titre', '$sous_titre', '$image', '$texte_intro', '$titre_expli', '$texte_expli' )");
+        //             Si le post est inséré
+        //                 Alors
+        //                     Afficher un message de succès
+                    if ($insert_post) {
+                        echo '<script language="Javascript">
+                        document.location.replace("admin.php");
+                        </script>';
+                    } else {
+                        echo "<span class='error'> Votre message n'a pas été envoyé.</span>";
+                    }
+                }
+        }
+        ?>
+
+        <div class="block">
+						<form class="custom-form" action="" method="post" id="add_post">
+							<div class="row form-group" style="margin-bottom: 5px">
+								<div class="col-sm-4 label-column">
+									<label class="col-form-label" for="name-input-field"
+										>Titre</label
+									>
+								</div>
+								<div class="col-sm-6 input-column">
+									<input class="form-control" type="text" id="Titre" name="Titre" value="<?php echo "$G_title"?>" />
+								</div>
 							</div>
-							<div class="col">
-								<p class="text-info m-0 fw-bold">Arrière de carte</p>
+							<div class="row form-group" style="margin-bottom: 5px">
+								<div class="col-sm-4 label-column">
+									<label class="col-form-label" for="email-input-field"
+										>Sous-titre</label
+									>
+								</div>
+								<div class="col-sm-6 input-column">
+									<input class="form-control" type="text" id="Sous-titre" name="Sous-titre" value="<?php echo "$G_subtitle"?>"/>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-12">
-							<div class="table-responsive">
-								<table class="table table-striped table tablesorter" id="ipi-table">
-									<thead class="thead-dark">
-										<tr>
-											<th class="text-center text-light">Titre</th>
-											<th class="text-center">Sous-titre</th>
-											<th class="text-center">image</th>
-											<th class="text-center filter-false sorter-false">
-												Texte intro
-											</th>
-											<th class="text-center text-info">Titre Explication</th>
-											<th class="text-center text-info">Texte explication</th>
-											<th class="text-center">actions</th>
-										</tr>
-									</thead>
-									<tbody class="text-center">
-										<?php
-                    					// Récupérer les données de la table post
-                    					$bdd = new PDO('mysql:host=localhost;dbname=projet13;charset=utf8','root');
-                    					$requete = $bdd->query("SELECT * FROM projets");
-                    					// Tant que les données sont récupérées
-                    					while ($donnees = $requete->fetch(PDO::FETCH_ASSOC)) {
-                    					//     Afficher les données
-                    					?>
-										<tr>
-											<td><?php echo $donnees['Titre']; ?></td>
-											<td><?php echo $donnees['Sous_titre']; ?></td>
-											<td><img src='<?php echo $donnees['Image']; ?>' height="40px" width="80px" alt="Image d'illustration"></td>
-											<td><?php echo $donnees['Texte_intro']; ?></td>
-											<td><?php echo $donnees['Titre_expli']; ?></td>
-											<td><?php echo $donnees['Texte_expli']; ?></td>
-											<td
-												class="text-center align-middle"
-												style="max-height: 60px; height: 60px"
-											>
-												<a
-													class="btn btnMaterial btn-flat success semicircle"
-													role="button"
-													href="http://localhost/Code/edit_project.php?edit_post=<?php echo $donnees['id']?>"
-													><i class="fas fa-pen"></i></a
-												><a
-													class="btn btnMaterial btn-flat accent btnNoBorders checkboxHover"
-													role="button"
-													style="margin-left: 5px"
-													href="http://localhost/Code/delete_projects.php?id=<?php echo $donnees['id'];?>"
-													><i
-														class="fas fa-trash btnNoBorders"
-														style="color: #dc3545"
-													></i
-												></a>
-											</td>
-										</tr>
-										<?php 
-                    					}
-                    					?>
-									</tbody>
-								</table>
+							<div class="row form-group" style="margin-bottom: 5px">
+								<div class="col-sm-4 label-column">
+									<label class="col-form-label" for="pawssword-input-field"
+										>Image</label
+									>
+								</div>
+								<div class="col-sm-6 input-column">
+								<input class="form-control" type="text" id="image" name="image" value="<?php echo "$G_image"?>"/>
+								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-				<!-- End: TableSorter -->
-			</div>
-			<!-- End: Ludens - 1 Index Table with Search & Sort Filters -->
-		</div>
-		
+							<div class="row form-group" style="margin-bottom: 5px">
+								<div class="col-sm-4 label-column">
+									<label class="col-form-label" for="repeat-pawssword-input-field"
+										>Texte Intro</label
+									>
+								</div>
+								<div class="col-sm-6 input-column">
+									<textarea class="form-control"id="Texte_intro" name="Texte_intro" value="<?php echo "$G_txtint"?>"></textarea>
+								</div>
+							</div>
+							<div class="row form-group" style="margin-bottom: 5px">
+								<div class="col-sm-4 label-column">
+									<label
+										class="col-form-label"
+										for="pawssword-input-field"
+										style="text-align: left"
+										>Titre explication</label
+									>
+								</div>
+								<div class="col-sm-6 input-column">
+									<input class="form-control" type="text" id="Titre_expli" name="Titre_expli" value="<?php echo "$G_titlexpl"?>"/>
+								</div>
+							</div>
+							<div class="row form-group">
+								<div class="col-sm-4 label-column">
+									<label class="col-form-label" for="repeat-pawssword-input-field"
+										>Texte explication</label
+									>
+								</div>
+								<div class="col-sm-6 input-column">
+									<textarea class="form-control" id="Texte_expli" name="Texte_expli" value="<?php echo "$G_txtxpl"?>"></textarea>
+								</div>
+								<div class="col-sm-6 input-column">
+									<button class="btn btn-primary" type="submit" name="submit">Envoyer</button>
+								</div>
+							</div>
+						</form>
+        </div>
+    </div>
+</div>
+
 		<div>
 			<!-- Start: Footer Clean -->
 			<footer
