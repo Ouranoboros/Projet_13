@@ -308,7 +308,7 @@ if (isset($_GET["edit_post"])){
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<textarea class="form-control"id="Texte_intro" name="Texte_intro" value="<?php echo "$G_txtint"?>"></textarea>
+									<textarea class="form-control"id="Texte_intro" name="Texte_intro"><?php echo "$G_txtint"?></textarea>
 								</div>
 							</div>
 							<div class="row form-group" style="margin-bottom: 5px">
@@ -331,7 +331,7 @@ if (isset($_GET["edit_post"])){
 									>
 								</div>
 								<div class="col-sm-6 input-column">
-									<textarea class="form-control" id="Texte_expli" name="Texte_expli" value="<?php echo "$G_txtxpl"?>"></textarea>
+									<textarea class="form-control" id="Texte_expli" name="Texte_expli"><?php echo "$G_txtxpl"?></textarea>
 								</div>
 								<div class="col-sm-6 input-column">
 									<button class="btn btn-primary" type="submit" name="submit">Envoyer</button>
